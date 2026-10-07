@@ -20,15 +20,14 @@ spec:
         name: dev-machine-template
   workers:
     machineDeployments:
-      - class: linux-workers
-        templateRef:
-          bootstrap:
-            templateRef:
-              apiVersion: bootstrap.cluster.x-k8s.io/v1beta2
-              kind: KubeadmConfigTemplate
-              name: dev-worker-config
-          infrastructure:
-            templateRef:
-              apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
-              kind: DevMachineTemplate
-              name: dev-machine-template
+      - class: dev-worker
+        bootstrap:
+          templateRef:
+            apiVersion: bootstrap.cluster.x-k8s.io/v1beta2
+            kind: KubeadmConfigTemplate
+            name: dev-worker-config
+        infrastructure:
+          templateRef:
+            apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+            kind: DevMachineTemplate
+            name: dev-machine-template

@@ -11,6 +11,6 @@ spec:
       replicas: 1
     workers:
       machineDeployments:
-        - class: linux-workers
+        - class: dev-worker
           name: primary-workers
           replicas: 2
