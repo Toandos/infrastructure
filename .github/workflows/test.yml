@@ -45,6 +45,13 @@ jobs:
         run: |
           kubectl kustomize . | kubectl apply -f -
 
+      - name: Wait for CAPI providers to be ready
+        run: |
+          kubectl wait --namespace capi-operator-system \
+          --for=condition=Ready \
+          --all providers.operator.cluster.x-k8s.io \
+          --timeout=2m
+
       - name: Apply CAPI resources
         working-directory: ./resources
         run: |
