@@ -61,7 +61,7 @@ jobs:
       - name: Wait for cluster being ready
         run: |
           echo "Waiting for cluster control plane to report Provisioned status..."
-          kubectl wait --for=condition=Ready cluster/production-cluster-01 --timeout=2m
+          kubectl wait --namespace cluster-api --for=condition=Ready cluster/production-cluster-01 --timeout=2m
           
           echo "Waiting for Kubeadm control plane to be initialized..."
-          kubectl wait --for=jsonpath='{.status.initialized}'=true kubeadmcontrolplane/production-cluster-01-control-plane --timeout=2m
+          kubectl wait --namespace cluster-api --for=jsonpath='{.status.initialized}'=true kubeadmcontrolplane/production-cluster-01-control-plane --timeout=2m
