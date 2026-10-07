@@ -16,12 +16,9 @@ jobs:
 
       - name: Install CAPI Operator
         run: |
-          helm repo add capi-operator https://github.io
+          helm repo add capi-operator https://kubernetes-sigs.github.io/cluster-api-operator
           helm repo update
-          helm install capi-operator capi-operator/cluster-api-operator \
-            --create-namespace \
-            --namespace capi-operator \
-            --wait
+          helm install capi-operator capi-operator/cluster-api-operator --create-namespace -n capi-operator-system
 
       - name: Apply resources
         working-directory: ./resources
