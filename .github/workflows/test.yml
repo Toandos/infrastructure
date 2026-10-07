@@ -8,12 +8,16 @@ jobs:
   create-cluster:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Create cluster
         uses: helm/kind-action@v1
 
       - name: Apply resources
+        working-directory: ./resources
         run: |
-          kustomize build ./resources | kubectl apply -f -
+          kubectl kustomize . | kubectl apply -f -
 
       - name: Wait for cluster being ready
         run: |
