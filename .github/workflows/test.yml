@@ -28,7 +28,12 @@ jobs:
           helm repo update
           helm install capi-operator capi-operator/cluster-api-operator --create-namespace -n capi-operator-system
 
-      - name: Apply resources
+      - name: Apply CAPI providers
+        working-directory: ./providers
+        run: |
+          kubectl kustomize . | kubectl apply -f -
+
+      - name: Apply CAPI resources
         working-directory: ./resources
         run: |
           kubectl kustomize . | kubectl apply -f -
