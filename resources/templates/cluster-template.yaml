@@ -1,7 +1,7 @@
-apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-kind: DockerClusterTemplate
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+kind: DevClusterTemplate
 metadata:
-  name: docker-cluster-template
+  name: dev-cluster-template
 spec:
   template:
     spec: {}

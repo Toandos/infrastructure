@@ -1,34 +1,34 @@
-apiVersion: cluster.x-k8s.io/v1beta1
+apiVersion: cluster.x-k8s.io/v1beta2
 kind: ClusterClass
 metadata:
-  name: docker-cluster-class
+  name: dev-cluster-class
 spec:
   infrastructure:
-     ref:
-      apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-      kind: DockerClusterTemplate
-      name: docker-cluster-template
+    templateRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+      kind: DevClusterTemplate
+      name: dev-cluster-template
   controlPlane:
-    ref:
-      apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+    templateRef:
+      apiVersion: controlplane.cluster.x-k8s.io/v1beta2
       kind: KubeadmControlPlaneTemplate
-      name: docker-controlplane-config
+      name: dev-controlplane-config
     machineInfrastructure:
-      ref:
-        apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-        kind: DockerMachineTemplate
-        name: docker-machine-template
+      templateRef:
+        apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+        kind: DevMachineTemplate
+        name: dev-machine-template
   workers:
     machineDeployments:
       - class: linux-workers
         template:
           bootstrap:
-            ref:
-              apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+            templateRef:
+              apiVersion: bootstrap.cluster.x-k8s.io/v1beta2
               kind: KubeadmConfigTemplate
-              name: docker-worker-config
-          infrastructureRef:
-            ref:
-              apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-              kind: DockerMachineTemplate
-              name: docker-machine-template
+              name: dev-worker-config
+          infrastructure:
+            templateRef:
+              apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+              kind: DevMachineTemplate
+              name: dev-machine-template

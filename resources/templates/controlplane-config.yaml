@@ -1,7 +1,7 @@
-apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+apiVersion: controlplane.cluster.x-k8s.io/v1beta2
 kind: KubeadmControlPlaneTemplate
 metadata:
-  name: docker-controlplane-config
+  name: dev-controlplane-config
 spec:
   template:
     spec:
