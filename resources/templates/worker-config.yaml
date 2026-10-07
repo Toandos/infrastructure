@@ -9,5 +9,7 @@ spec:
         nodeRegistration:
           criSocket: /var/run/containerd/containerd.sock
           kubeletExtraArgs:
-            cgroup-driver: systemd
-            provider-id: docker://
+            - name: cgroup-driver
+              value: systemd
+            - name: provider-id
+              value: docker://

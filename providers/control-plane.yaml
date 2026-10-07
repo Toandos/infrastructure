@@ -4,3 +4,6 @@ metadata:
   name: kubeadm
 spec:
   version: v1.14.2
+  manager:
+    featureGates:
+      ClusterTopology: true
