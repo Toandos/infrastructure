@@ -14,6 +14,15 @@ jobs:
       - name: Create cluster
         uses: helm/kind-action@v1
 
+      - name: Install CAPI Operator
+        run: |
+          helm repo add capi-operator https://github.io
+          helm repo update
+          helm install capi-operator capi-operator/cluster-api-operator \
+            --create-namespace \
+            --namespace capi-operator \
+            --wait
+
       - name: Apply resources
         working-directory: ./resources
         run: |
