@@ -47,18 +47,11 @@ jobs:
 
       - name: Wait for CAPI providers to be ready
         run: |
-          kubectl wait --namespace capi-operator-system \
-            --for=condition=Ready \
-            --timeout=2m \
-            coreproviders.operator.cluster.x-k8s.io --all || true
-            
-          kubectl wait --namespace capi-operator-system \
-            --for=condition=Ready \
-            --timeout=3m \
-            infrastructureproviders.operator.cluster.x-k8s.io --all \
-            bootstrapproviders.operator.cluster.x-k8s.io --all \
-            controlplaneproviders.operator.cluster.x-k8s.io --all \
-            addonproviders.operator.cluster.x-k8s.io --all
+          kubectl wait --namespace capi-operator-system --for=condition=Ready --timeout=1m coreproviders.operator.cluster.x-k8s.io --all
+          kubectl wait --namespace capi-operator-system --for=condition=Ready --timeout=1m infrastructureproviders.operator.cluster.x-k8s.io --all
+          kubectl wait --namespace capi-operator-system --for=condition=Ready --timeout=1m bootstrapproviders.operator.cluster.x-k8s.io --all
+          kubectl wait --namespace capi-operator-system --for=condition=Ready --timeout=1m controlplaneproviders.operator.cluster.x-k8s.io --all
+          kubectl wait --namespace capi-operator-system --for=condition=Ready --timeout=1m addonproviders.operator.cluster.x-k8s.io --all
 
       - name: Apply CAPI resources
         working-directory: ./resources
