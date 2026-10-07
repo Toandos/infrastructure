@@ -28,6 +28,18 @@ jobs:
           helm repo update
           helm install capi-operator capi-operator/cluster-api-operator --create-namespace -n capi-operator-system
 
+      - name: Wait for CAPI Operator webhook to be ready
+        run: |
+          kubectl wait --namespace capi-operator-system \
+            --for=condition=ready pod \
+            --selector=control-plane=controller-manager \
+            --timeout=2m
+          
+          kubectl wait --namespace capi-operator-system \
+            --for=jsonpath='{.subsets[0].addresses[0].ip}' \
+            endpoints/capi-operator-webhook-service \
+            --timeout=1m
+
       - name: Apply CAPI providers
         working-directory: ./providers
         run: |
